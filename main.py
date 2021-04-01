@@ -1,15 +1,11 @@
 import discord
 import os
-# from datetime import datetime
-# import json
 from Pinger import StatusPing
 from server import keep_alive
 import discord.ext
 import base64
 import asyncio
-from discord.utils import get
-from discord.ext import commands, tasks
-from discord.ext.commands import has_permissions, CheckFailure, check
+from discord.ext import commands
 
 LIST = []
 
@@ -52,7 +48,6 @@ class discordRoom:
 
 
 TIMEOUT = 2
-# SERVERHOST = "https://Discord-Bot-for-MC.stevenrhenaldy.repl.co"
 SERVERHOST = "https://DiscordMC.stevenrhenaldy.repl.co"
 
 client = discord.Client()
@@ -144,7 +139,6 @@ async def addserver(ctx, serveraddr: str=""):
   status = StatusPing(server.host, server.port, TIMEOUT)
   getstats = status.get_status()
 
-  # print(getstats)
   image_data = getstats['favicon']
   image_file = f"pic/{server.host}.png" 
   if not os.path.exists(image_file):
@@ -304,9 +298,8 @@ async def test(ctx):
   await ctx.send(output)
   return
 
+if __name__ == "__main__":
+  client.loop.create_task(my_background_task())
+  keep_alive()
 
-
-client.loop.create_task(my_background_task())
-keep_alive()
-
-client.run(os.getenv("TOKEN"))
+  client.run(os.getenv("TOKEN"))

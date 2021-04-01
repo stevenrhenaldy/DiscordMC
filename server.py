@@ -16,7 +16,7 @@ def send_js(path):
 def run():
   app.run(
 		host='0.0.0.0',
-		port=8080
+		port=80
 	)
 
 def keep_alive():
